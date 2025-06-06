@@ -6,13 +6,15 @@ public class Library {
     private final ArrayList<Book> booksList = new ArrayList<>();
 
     public void addNewBook (Book book) {
+        book.markAsAvailable();
         booksList.add(book);
     }
 
     // Ao adicionar um livro ao acervo, ele é inicialmente definido como disponível.
     public void addNewBook (String title, String author) {
-        Book newBook = new Book(title, author, true);
+        Book newBook = new Book(title, author);
 
+        newBook.markAsAvailable();
         booksList.add(newBook);
     }
 
