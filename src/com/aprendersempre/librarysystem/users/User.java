@@ -1,29 +1,45 @@
 package com.aprendersempre.librarysystem.users;
 
 import com.aprendersempre.librarysystem.books.Book;
-
 import java.util.ArrayList;
 
-public class User {
-    private int ID;
+public abstract class User {
+    private static int IdCounter = 1;
+    private int Id;
     private String fullName;
-    private boolean isTeacher;
+    protected String userType;
+    protected int bookLoanLimit;
     private ArrayList<Book> borrowedBooksList = new ArrayList<>();
-    private int bookLoanLimit;
 
-    User(int ID, String fullName, boolean isTeacher, int bookLoanLimit) {
-        this.ID = ID;
+    User(String fullName) {
+        this.Id = IdCounter++;
         this.fullName = fullName;
-        this.isTeacher = isTeacher;
-        this.bookLoanLimit = bookLoanLimit;
+    }
+
+    public static User createUser(String fullName, UserType userType) {
+        switch (userType) {
+            case TEACHER:
+                return new Teacher(fullName);
+            case STUDENT:
+                return new Student(fullName);
+        }
+        return null;
     }
 
     public String getFullName() {
         return fullName;
     }
 
+    abstract void setUserType();
+
     public String getUserType() {
-        return isTeacher? "Teacher" : "Student";
+        return userType;
+    }
+
+    abstract void setBookLoanLimit();
+
+    public int getBookLoanLimit() {
+        return bookLoanLimit;
     }
 
     public boolean canLendBooks() {
@@ -50,6 +66,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "#" + this.ID + " | " + this.fullName + " (" + this.getUserType() + ")";
+        return "#" + this.Id + " | " + this.fullName + " (" + this.getUserType() + ")";
     }
 }

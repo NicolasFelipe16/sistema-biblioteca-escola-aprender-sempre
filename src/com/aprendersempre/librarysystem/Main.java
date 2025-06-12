@@ -3,6 +3,7 @@ package com.aprendersempre.librarysystem;
 import com.aprendersempre.librarysystem.books.Book;
 import com.aprendersempre.librarysystem.books.Library;
 import com.aprendersempre.librarysystem.users.User;
+import com.aprendersempre.librarysystem.users.UserType;
 import com.aprendersempre.librarysystem.users.UsersRegistry;
 
 public class Main {
@@ -18,12 +19,11 @@ public class Main {
         System.out.println(library.getBooksList());
         library.showFormatedBooksList(); // Lista de livros formatada
 
-
         // REGISTRO DE USUÁRIOS
         UsersRegistry usersRegistry = new UsersRegistry(); // Criação de registro de usuários
-        usersRegistry.addNewUser("Diego", true); // Adição de usuário
-        usersRegistry.addNewUser("Flávia", false);
-        usersRegistry.addNewUser("Geraldo", true);
+        usersRegistry.addNewUser("Diego", UserType.TEACHER); // Adição de usuário
+        usersRegistry.addNewUser("Flávia", UserType.STUDENT);
+        usersRegistry.addNewUser("Geraldo", UserType.TEACHER);
         System.out.println(usersRegistry.getUsersList());
         usersRegistry.showFormatedUsersList(); // Lista de usuários formatada
 
@@ -32,7 +32,9 @@ public class Main {
         usersRegistry.getUserByID(2).showFormatedBorrowedBooksList(); // Lista de livros emprestados formatada
 
         for (User user : usersRegistry.getUsersList()) {
-            if (user.canLendBooks()) System.out.println(user +  " | " + user.getBorrowedBooksList());
+            if (user.canLendBooks()) {
+                System.out.println(user + " | " + user.getBookLoanLimit() + " | " + user.getBorrowedBooksList());
+            }
         }
     }
 }

@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 public class UsersRegistry {
     private ArrayList<User> usersList = new ArrayList<>();
-    private int nextID;
 
-    public void addNewUser (String userFullName, boolean isTeacher) {
-        nextID = usersList.size() + 1;
-
-        User newUser = isTeacher ? new Teacher(nextID, userFullName) : new Student(nextID, userFullName);
+    public void addNewUser (String fullName, UserType userType) {
+        User newUser = User.createUser(fullName, userType);
 
         usersList.add(newUser);
     }
