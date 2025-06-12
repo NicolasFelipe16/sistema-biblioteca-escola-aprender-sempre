@@ -1,4 +1,4 @@
-package com.aprendersempre.librarysystem;
+package com.aprendersempre.librarysystem.books;
 
 import java.util.ArrayList;
 
@@ -18,13 +18,21 @@ public class Library {
         booksList.add(newBook);
     }
 
-    public void changeBookAvailability (String bookTitle, boolean isAvailable) {
-        for (Book book : booksList) {
-            if (book.getTitle().trim().equalsIgnoreCase(bookTitle.trim())) book.setAvailability(isAvailable);
-        }
-    }
-
     public ArrayList<Book> getBooksList() {
         return booksList;
+    }
+
+    public void showFormatedBooksList() {
+        System.out.print("""
+                ==============================
+                BOOKS LIST
+                ==============================
+                """);
+
+        for (Book book : booksList) {
+            System.out.println(book);
+        }
+
+        System.out.println("==============================");
     }
 }

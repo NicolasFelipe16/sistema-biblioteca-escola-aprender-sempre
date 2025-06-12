@@ -1,4 +1,4 @@
-package com.aprendersempre.librarysystem;
+package com.aprendersempre.librarysystem.books;
 
 public class Book {
     private String title;
