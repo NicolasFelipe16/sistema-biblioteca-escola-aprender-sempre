@@ -6,13 +6,16 @@ public class UsersRegistry {
     private ArrayList<User> usersList = new ArrayList<>();
 
     public void addNewUser (String fullName, UserType userType) {
-        User newUser = User.createUser(fullName, userType);
+        User newUser = UserFactory.createUser(fullName, userType);
 
         usersList.add(newUser);
     }
 
-    public User getUserByID(int userID) {
-        return usersList.get(userID - 1); // Os IDs se iniciam em 1, os índices em 0.
+    public User getUserByID(int userId) {
+        return usersList.stream()
+                .filter(user -> user.getId() == userId)
+                .findFirst()
+                .orElse(null);
     }
 
     public ArrayList<User> getUsersList() {

@@ -4,43 +4,31 @@ import com.aprendersempre.librarysystem.books.Book;
 import java.util.ArrayList;
 
 public abstract class User {
-    private static int IdCounter = 1;
-    private int Id;
+    private static int idCounter = 1;
+    private int id;
     private String fullName;
     protected String userType;
     protected int bookLoanLimit;
     private ArrayList<Book> borrowedBooksList = new ArrayList<>();
 
     User(String fullName) {
-        this.Id = IdCounter++;
+        this.id = idCounter++;
         this.fullName = fullName;
     }
 
-    public static User createUser(String fullName, UserType userType) {
-        switch (userType) {
-            case TEACHER:
-                return new Teacher(fullName);
-            case STUDENT:
-                return new Student(fullName);
-        }
-        return null;
+    public int getId() {
+        return id;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    abstract void setUserType();
+    abstract UserType getType();
 
-    public String getUserType() {
-        return userType;
-    }
-
-    abstract void setBookLoanLimit();
-
-    public int getBookLoanLimit() {
+    public int bookLoanLimit() {
         return bookLoanLimit;
-    }
+    };
 
     public boolean canLendBooks() {
         return bookLoanLimit > borrowedBooksList.size();
@@ -66,6 +54,6 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "#" + this.Id + " | " + this.fullName + " (" + this.getUserType() + ")";
+        return "#" + this.id + " | " + this.fullName + " (" + this.getType() + ")";
     }
 }

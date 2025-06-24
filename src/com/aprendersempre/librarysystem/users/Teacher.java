@@ -1,19 +1,13 @@
 package com.aprendersempre.librarysystem.users;
 
 public class Teacher extends User{
-    public Teacher(String fullName) {
+    Teacher(String fullName) {
         super(fullName);
-        setBookLoanLimit();
-        setUserType();
+        bookLoanLimit = 5;
     }
 
     @Override
-    void setUserType() {
-        this.userType = "Teacher";
-    }
-
-    @Override
-    void setBookLoanLimit() {
-        this.bookLoanLimit = 5;
+    UserType getType() {
+        return UserType.TEACHER;
     }
 }

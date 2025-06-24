@@ -33,7 +33,7 @@ public class Main {
 
         for (User user : usersRegistry.getUsersList()) {
             if (user.canLendBooks()) {
-                System.out.println(user + " | " + user.getBookLoanLimit() + " | " + user.getBorrowedBooksList());
+                System.out.println(user + " | " + user.bookLoanLimit() + " | " + user.getBorrowedBooksList());
             }
         }
     }
