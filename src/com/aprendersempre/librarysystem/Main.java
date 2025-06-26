@@ -1,31 +1,40 @@
 package com.aprendersempre.librarysystem;
 
+import com.aprendersempre.librarysystem.books.Book;
+import com.aprendersempre.librarysystem.books.Library;
+import com.aprendersempre.librarysystem.users.User;
+import com.aprendersempre.librarysystem.users.UserType;
+import com.aprendersempre.librarysystem.users.UsersRegistry;
+
 public class Main {
     public static void main(String[] args) {
-        Book myBook = new Book("My Book", "Me");
-        System.out.println(myBook);
+        // BIBLIOTECA
+        Library library = new Library(); // Criação de biblioteca
+        library.addNewBook("Book 01", "Gabriel Almeida"); // Adição de livro por parâmetros
 
-        myBook.setAvailability(true);
-        System.out.println(myBook);
+        Book book02 = new Book("Book 02", "Juliana Fagundes"); // Criação de livro
+        library.addNewBook(book02); // Adição de livro já criado
 
-        myBook.setAvailability(false);
-        System.out.println(myBook);
-
-
-
-        Library library = new Library();
+        library.addNewBook("Book 03", "Tiago Lima");
         System.out.println(library.getBooksList());
+        library.showFormatedBooksList(); // Lista de livros formatada
 
-        library.addNewBook("Book 01", "Nícolas Felipe");
-        System.out.println(library.getBooksList());
+        // REGISTRO DE USUÁRIOS
+        UsersRegistry usersRegistry = new UsersRegistry(); // Criação de registro de usuários
+        usersRegistry.addNewUser("Diego", UserType.TEACHER); // Adição de usuário
+        usersRegistry.addNewUser("Flávia", UserType.STUDENT);
+        usersRegistry.addNewUser("Geraldo", UserType.TEACHER);
+        System.out.println(usersRegistry.getUsersList());
+        usersRegistry.showFormatedUsersList(); // Lista de usuários formatada
 
-        library.addNewBook("Book 02", "Vinicius Louzada");
-        System.out.println(library.getBooksList());
+        System.out.println(usersRegistry.getUserByID(2).getFullName()); // Consulta de usuário
+        System.out.println(usersRegistry.getUserByID(2).getBorrowedBooksList());
+        usersRegistry.getUserByID(2).showFormatedBorrowedBooksList(); // Lista de livros emprestados formatada
 
-        library.addNewBook(myBook);
-        System.out.println(library.getBooksList());
-
-        library.changeBookAvailability("Book 01", false);
-        System.out.println(library.getBooksList());
+        for (User user : usersRegistry.getUsersList()) {
+            if (user.canLendBooks()) {
+                System.out.println(user + " | " + user.bookLoanLimit() + " | " + user.getBorrowedBooksList());
+            }
+        }
     }
 }
