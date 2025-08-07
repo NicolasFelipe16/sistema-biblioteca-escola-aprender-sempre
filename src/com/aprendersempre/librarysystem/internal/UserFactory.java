@@ -1,4 +1,4 @@
-package com.aprendersempre.librarysystem.users;
+package com.aprendersempre.librarysystem.internal;
 
 public class UserFactory {
     public static User createUser(String fullName, UserType userType) {

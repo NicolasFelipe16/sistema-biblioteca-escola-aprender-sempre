@@ -1,4 +1,4 @@
-package com.aprendersempre.librarysystem.users;
+package com.aprendersempre.librarysystem.internal;
 
 public enum UserType {
     TEACHER,
