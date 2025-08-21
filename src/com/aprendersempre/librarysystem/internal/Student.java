@@ -1,13 +1,13 @@
-package com.aprendersempre.librarysystem.users;
+package com.aprendersempre.librarysystem.internal;
 
 public class Student extends User{
-    Student(String fullName) {
+    public Student(String fullName) {
         super(fullName);
         bookLoanLimit = 3;
     }
 
     @Override
-    UserType getType() {
+    public UserType getType() {
         return UserType.STUDENT;
     }
 }

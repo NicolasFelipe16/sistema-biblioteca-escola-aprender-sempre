@@ -1,6 +1,5 @@
-package com.aprendersempre.librarysystem.users;
+package com.aprendersempre.librarysystem.internal;
 
-import com.aprendersempre.librarysystem.books.Book;
 import java.util.ArrayList;
 
 public abstract class User {
@@ -9,15 +8,11 @@ public abstract class User {
     private String fullName;
     protected String userType;
     protected int bookLoanLimit;
-    private ArrayList<Book> borrowedBooksList = new ArrayList<>();
+    ArrayList<Book> borrowedBooksList = new ArrayList<>();
 
     User(String fullName) {
         this.id = idCounter++;
         this.fullName = fullName;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getFullName() {
@@ -28,9 +23,9 @@ public abstract class User {
 
     public int bookLoanLimit() {
         return bookLoanLimit;
-    };
+    }
 
-    public boolean canLendBooks() {
+    public boolean canBorrowBooks() {
         return bookLoanLimit > borrowedBooksList.size();
     }
 
@@ -38,15 +33,19 @@ public abstract class User {
         return borrowedBooksList;
     }
 
+    public void addBorrowedBook(Book book) {
+        this.borrowedBooksList.add(book);
+    }
+
     public void showFormatedBorrowedBooksList() {
-        System.out.print("""
+        System.out.printf("""
                 ==============================
-                BORROWED BOOKS LIST
+                BORROWED BOOKS LIST (%d)
                 ==============================
-                """);
+                """, borrowedBooksList.size());
 
         for (Book book : borrowedBooksList) {
-            System.out.println(book);
+            System.out.println(book.getTitle());
         }
 
         System.out.println("==============================");

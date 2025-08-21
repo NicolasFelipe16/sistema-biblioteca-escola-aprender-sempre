@@ -1,40 +1,54 @@
 package com.aprendersempre.librarysystem;
 
-import com.aprendersempre.librarysystem.books.Book;
-import com.aprendersempre.librarysystem.books.Library;
-import com.aprendersempre.librarysystem.users.User;
-import com.aprendersempre.librarysystem.users.UserType;
-import com.aprendersempre.librarysystem.users.UsersRegistry;
+import com.aprendersempre.librarysystem.internal.Book;
+import com.aprendersempre.librarysystem.internal.LoanService;
+import com.aprendersempre.librarysystem.internal.Student;
+import com.aprendersempre.librarysystem.internal.Teacher;
+import com.aprendersempre.librarysystem.internal.User;
 
 public class Main {
     public static void main(String[] args) {
-        // BIBLIOTECA
-        Library library = new Library(); // Criação de biblioteca
-        library.addNewBook("Book 01", "Gabriel Almeida"); // Adição de livro por parâmetros
+        Book book0 = new Book("B-00", "Wagner");
+        Book book1 = new Book("B-01", "Nícolas");
+        Book book2 = new Book("B-02", "Matheus");
+        Book book3 = new Book("B-03", "Priscila");
+        Book book4 = new Book("B-04", "Camila");
+        Book book5 = new Book("B-05", "Vinícius");
+        Book book6 = new Book("B-06", "Ronaldo");
+        Book book7 = new Book("B-07", "Julia");
+        Book book8 = new Book("B-08", "Carla");
+        Book book9 = new Book("B-09", "Marcos");
 
-        Book book02 = new Book("Book 02", "Juliana Fagundes"); // Criação de livro
-        library.addNewBook(book02); // Adição de livro já criado
+        LoanService loanService = new LoanService();
 
-        library.addNewBook("Book 03", "Tiago Lima");
-        System.out.println(library.getBooksList());
-        library.showFormatedBooksList(); // Lista de livros formatada
+        // Professor > Limite 5 empréstimos simultâneos
+        User vinicius = new Teacher("Vinícius Louzada");
 
-        // REGISTRO DE USUÁRIOS
-        UsersRegistry usersRegistry = new UsersRegistry(); // Criação de registro de usuários
-        usersRegistry.addNewUser("Diego", UserType.TEACHER); // Adição de usuário
-        usersRegistry.addNewUser("Flávia", UserType.STUDENT);
-        usersRegistry.addNewUser("Geraldo", UserType.TEACHER);
-        System.out.println(usersRegistry.getUsersList());
-        usersRegistry.showFormatedUsersList(); // Lista de usuários formatada
+        // Tentativa de 6 empréstimos simultâneos
+        loanService.createLoan(book0, vinicius);
+        // Tentativa de empréstimo de livro indisponível
+        loanService.createLoan(book0, vinicius);
+        loanService.createLoan(book1, vinicius);
+        loanService.createLoan(book2, vinicius);
+        loanService.createLoan(book3, vinicius);
+        loanService.createLoan(book4, vinicius);
+        loanService.createLoan(book5, vinicius);
 
-        System.out.println(usersRegistry.getUserByID(2).getFullName()); // Consulta de usuário
-        System.out.println(usersRegistry.getUserByID(2).getBorrowedBooksList());
-        usersRegistry.getUserByID(2).showFormatedBorrowedBooksList(); // Lista de livros emprestados formatada
+        // Livros emprestados (5)
+        vinicius.showFormatedBorrowedBooksList();
 
-        for (User user : usersRegistry.getUsersList()) {
-            if (user.canLendBooks()) {
-                System.out.println(user + " | " + user.bookLoanLimit() + " | " + user.getBorrowedBooksList());
-            }
-        }
+        // Estudante > Limite 3 empréstimos simultâneos
+        User nicolas = new Student("Nícolas Felipe");
+
+        // Tentativa de 4 empréstimos simultâneos
+        loanService.createLoan(book6, nicolas);
+        // Tentativa de empréstimo de livro indisponível
+        loanService.createLoan(book6, nicolas);
+        loanService.createLoan(book7, nicolas);
+        loanService.createLoan(book8, nicolas);
+        loanService.createLoan(book9, nicolas);
+
+        // Livros emprestados (3)
+        nicolas.showFormatedBorrowedBooksList();
     }
 }
