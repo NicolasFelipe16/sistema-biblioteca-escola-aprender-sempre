@@ -1,7 +1,7 @@
 package com.aprendersempre.librarysystem;
 
 import com.aprendersempre.librarysystem.internal.Book;
-import com.aprendersempre.librarysystem.internal.LoanManager;
+import com.aprendersempre.librarysystem.internal.LoanService;
 import com.aprendersempre.librarysystem.internal.Student;
 import com.aprendersempre.librarysystem.internal.Teacher;
 import com.aprendersempre.librarysystem.internal.User;
@@ -19,20 +19,20 @@ public class Main {
         Book book8 = new Book("B-08", "Carla");
         Book book9 = new Book("B-09", "Marcos");
 
-        LoanManager loanManager = new LoanManager();
+        LoanService loanService = new LoanService();
 
         // Professor > Limite 5 empréstimos simultâneos
         User vinicius = new Teacher("Vinícius Louzada");
 
         // Tentativa de 6 empréstimos simultâneos
-        LoanManager.createLoan(book0, vinicius);
+        loanService.createLoan(book0, vinicius);
         // Tentativa de empréstimo de livro indisponível
-        LoanManager.createLoan(book0, vinicius);
-        LoanManager.createLoan(book1, vinicius);
-        LoanManager.createLoan(book2, vinicius);
-        LoanManager.createLoan(book3, vinicius);
-        LoanManager.createLoan(book4, vinicius);
-        LoanManager.createLoan(book5, vinicius);
+        loanService.createLoan(book0, vinicius);
+        loanService.createLoan(book1, vinicius);
+        loanService.createLoan(book2, vinicius);
+        loanService.createLoan(book3, vinicius);
+        loanService.createLoan(book4, vinicius);
+        loanService.createLoan(book5, vinicius);
 
         // Livros emprestados (5)
         vinicius.showFormatedBorrowedBooksList();
@@ -41,12 +41,12 @@ public class Main {
         User nicolas = new Student("Nícolas Felipe");
 
         // Tentativa de 4 empréstimos simultâneos
-        LoanManager.createLoan(book6, nicolas);
+        loanService.createLoan(book6, nicolas);
         // Tentativa de empréstimo de livro indisponível
-        LoanManager.createLoan(book6, nicolas);
-        LoanManager.createLoan(book7, nicolas);
-        LoanManager.createLoan(book8, nicolas);
-        LoanManager.createLoan(book9, nicolas);
+        loanService.createLoan(book6, nicolas);
+        loanService.createLoan(book7, nicolas);
+        loanService.createLoan(book8, nicolas);
+        loanService.createLoan(book9, nicolas);
 
         // Livros emprestados (3)
         nicolas.showFormatedBorrowedBooksList();

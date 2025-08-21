@@ -33,7 +33,7 @@ public abstract class User {
         return borrowedBooksList;
     }
 
-    public void addBookToList(Book book) {
+    public void addBorrowedBook(Book book) {
         this.borrowedBooksList.add(book);
     }
 
