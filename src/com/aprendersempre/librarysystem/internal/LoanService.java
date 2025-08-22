@@ -21,7 +21,7 @@ public class LoanService {
     }
 
     public void finishLoan(Book book, User user) {
-        this.loansList.removeIf(loan -> loan.getBook() == book);
+        this.loansList.removeIf(loan -> loan.getBook() == book && loan.getUser() == user);
 
         book.markAsAvailable();
         user.removeBorrowedBook(book);
