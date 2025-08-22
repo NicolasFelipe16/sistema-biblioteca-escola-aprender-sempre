@@ -36,6 +36,9 @@ public abstract class User {
     public void addBorrowedBook(Book book) {
         this.borrowedBooksList.add(book);
     }
+    public void removeBorrowedBook(Book book) {
+        this.borrowedBooksList.remove(book);
+    }
 
     public void showFormatedBorrowedBooksList() {
         System.out.printf("""

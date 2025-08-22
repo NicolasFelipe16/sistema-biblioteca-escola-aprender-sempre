@@ -12,4 +12,12 @@ public class Loan {
         this.user = user;
         this.time = LocalDate.now();
     }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }
